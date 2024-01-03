@@ -1,10 +1,10 @@
 ## 入札開始前 カウントダウン
 #> 終了処理
     # 残り0 → 入札終了, カウント停止
-    execute if data storage auction: {Bid:{Timer:{Raw:0}}} at @e[tag=Auction.StageMarker] as @a[distance=..32] run function auction:bid/end
-    execute if data storage auction: {Bid:{Timer:{Raw:0}}} run say ffs
-    execute if data storage auction: {Bid:{Timer:{Raw:0}}} run return -1
-    execute if data storage auction: {Bid:{Timer:{Raw:0}}} run say f
+    execute store success storage auction:temp BidEnded byte 1 if data storage auction: {Bid:{Timer:{Raw:0}}}
+
+    execute if data storage auction:temp {BidEnded:true} as @a[tag=Auction.Participant] run function auction:bid/end
+    execute if data storage auction:temp {BidEnded:true} run return -1
 
 #> 表示
     # 時間表示設定
@@ -30,18 +30,20 @@
     # ボスバー
     bossbar set auction:bid_timer name [{"text": "入札残り時間: ","color": "gold"},{"nbt":"Bid.Timer.Display","storage": "auction:","color": "white","interpret": true}]
 
-#> プレイヤー通知, 残り 5 からカウント
+#> プレイヤー通知, 適宜カウント等
     # title
-    execute if score #BidTimer Auction matches ..100 at @e[tag=Auction.StageMarker] as @a[distance=..32] run title @s title ""
-    execute if score #BidTimer Auction matches ..100 at @e[tag=Auction.StageMarker] as @a[distance=..32] run title @s times 6t 20t 3t
+    execute if score #BidTimer Auction matches ..99 as @a[tag=Auction.Participant] run title @s title ""
+    execute if score #BidTimer Auction matches ..99 as @a[tag=Auction.Participant] run title @s times 6t 20t 3t
 
-    execute if score #BidTimer Auction matches ..100 at @e[tag=Auction.StageMarker] as @a[distance=..32] run title @s subtitle [{"text": "- ","color": "gray"},{"nbt":"Bid.BidTimer","storage":"auction:","color": "gold"},{"text": " -","color": "gray"}]
+    execute if score #BidTimer Auction matches ..99 as @a[tag=Auction.Participant] run title @s subtitle [{"text": "- ","color": "gray"},{"nbt":"Bid.BidTimer","storage":"auction:","color": "gold"},{"text": " -","color": "gray"}]
     
-    # playsound
-    execute if score #BidTimer Auction matches ..100 at @e[tag=Auction.StageMarker] as @a[distance=..32] run playsound ui.button.click master @s ~ ~ ~ 1 2
-    execute if score #BidTimer Auction matches ..100 at @e[tag=Auction.StageMarker] as @a[distance=..32] run playsound block.note_block.bit master @s ~ ~ ~ 1 2
+    execute if data storage auction: {Bid:{Timer:{Raw:60}}} as @a[tag=Auction.Participant] run title @s subtitle [{"text": "- ","color": "gray"},{"nbt":"Bid.BidTimer","storage":"auction:","color": "gold"},{"text": " -","color": "gray"}]
 
-    execute if score #BidTimer Auction matches ..100 at @e[tag=Auction.StageMarker] as @a[distance=..32] run title @s subtitle [{"text": "- ","color": "gray"},{"nbt":"Bid.Timer.Second","storage":"auction:","color": "gold"},{"text": " -","color": "gray"}]
+    # playsound
+    execute if score #BidTimer Auction matches ..99 as @a[tag=Auction.Participant] at @s run playsound ui.button.click master @s ~ ~ ~ 1 2
+    execute if score #BidTimer Auction matches ..99 as @a[tag=Auction.Participant] at @s run playsound block.note_block.bit master @s ~ ~ ~ 1 2
+
+    execute if score #BidTimer Auction matches ..99 as @a[tag=Auction.Participant] run title @s subtitle [{"text": "- ","color": "gray"},{"nbt":"Bid.Timer.Second","storage":"auction:","color": "gold"},{"text": " -","color": "gray"}]
     
 #> 再帰処理
     # 減算

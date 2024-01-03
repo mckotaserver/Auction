@@ -14,10 +14,11 @@
     scoreboard players set #BidTimer Auction 3600
 
     # ボスバーセットアップ
-    bossbar set auction:bid_timer color yellow
-    bossbar set auction:bid_timer max 3600
     bossbar add auction:bid_timer [{"text": "入札残り時間: ","color": "gold"},{"text": "3:00","color": "white"}]
 
+    bossbar set auction:bid_timer color yellow
+    bossbar set auction:bid_timer max 3600
+    
     bossbar set auction:bid_timer players @s
 
     # カウントダウン開始

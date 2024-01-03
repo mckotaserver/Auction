@@ -6,3 +6,6 @@
     # タイマー実行
     function auction:bid/start_countdown
 
+# タグ
+    execute at @e[tag=Auction.StageMarker] as @a[distance=..32] run tag @s add Auction.Participant
+    

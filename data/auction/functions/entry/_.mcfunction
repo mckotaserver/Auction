@@ -21,6 +21,16 @@ advancement revoke @s only auction:on_entry/right
 
         function auction:entry/number_check with storage auction:temp Entry
 
+        # エントリーデータの作成
+        setblock ~ -64 ~ shulker_box replace
+        loot replace block ~ -64 ~ container.0 loot auction:player_head
+
+        data modify storage auction: PlayerEntryData append value {}
+        data modify storage auction: PlayerEntryData[0].Number set from storage auction:temp Entry.GeneratedNumber
+        data modify storage auction: PlayerEntryData[0].Name set from block ~ -64 ~ Items[0].tag.SkullOwner.Name
+        
+        setblock ~ -64 ~ air replace
+
         # 上で出力された数字は使用可能
         execute store result score @s Auction.EntryNumber run data get storage auction:temp Entry.GeneratedNumber
 
