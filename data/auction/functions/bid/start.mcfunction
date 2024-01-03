@@ -23,6 +23,7 @@
 
 # 最低入札額設定
 data modify storage auction: Bid.Top set value 900
+scoreboard players set #BidMin Auction 1000
 
     # カウントダウン開始
     function auction:bid/bid_countdown 

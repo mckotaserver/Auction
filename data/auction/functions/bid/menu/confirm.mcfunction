@@ -27,6 +27,10 @@
 
     # 最高額更新
     execute store result storage auction: Bid.Top int 1 run scoreboard players get @s Auction.Bid
+
+    scoreboard players operation #BidTop Auction.Bid = @s Auction.Bid
+    scoreboard players operation #BidMin Auction.Bid = @s Auction.Bid
+    scoreboard players add #BidMin Auction.Bid 100
     
     # 金額にカンマ付け
     execute store result score #BidTop Auction.Temp run data get storage auction: Bid.Top 
