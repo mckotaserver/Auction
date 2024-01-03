@@ -1,7 +1,7 @@
 ## 入札開始前 カウントダウン
 #> 開始処理
     # 残り0 → 本開始, カウント停止
-    execute if data storage auction: {Countdown:{Timer:0}} at @e[tag=Auction.StageMarker] as @a[distance=..32] run function auction:bid/start
+    execute if data storage auction: {Countdown:{Timer:0}} as @a[tag=Auction.Participant] at @s run function auction:bid/start
     execute if data storage auction: {Countdown:{Timer:0}} run return -1
 
 #> プレイヤー通知

@@ -6,7 +6,7 @@ scoreboard objectives add Auction.Temp dummy
 scoreboard objectives add Auction.Bid dummy
 
 scoreboard objectives add Constant dummy
-    scoreboard players set #100 Constant 100
+    scoreboard players set #1000 Constant 1000
     scoreboard players set #60 Constant 60
     scoreboard players set #10 Constant 10
     

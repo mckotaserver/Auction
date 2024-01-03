@@ -1,7 +1,7 @@
 ## 入札開始
 #> プレイヤー通知
     # playsound
-    playsound block.note_block.pling master @s ~ ~ ~ 1 1
+    execute at @s run playsound block.note_block.pling master @s ~ ~ ~ 1 1
 
     # tellraw
     tellraw @s [{"translate":"kota-server.auction.message.prefix"},{"translate":"kota-server.auction.message.bid_start"}]
@@ -21,7 +21,10 @@
     
     bossbar set auction:bid_timer players @s
 
+# 最低入札額設定
+data modify storage auction: Bid.Top set value 900
+
     # カウントダウン開始
-    schedule function auction:bid/bid_countdown 20t
+    function auction:bid/bid_countdown 
 
     
