@@ -11,7 +11,7 @@
     # 前回のエントリーデータを削除
     execute if data storage auction: {EntryAvailable:true} run data modify storage auction: PlayerEntryData set value []
 
-    execute if data storage auction: {EntryAvailable:true} run scoreboard players reset @a[tag=Auction.Entried] Auction.EntryNumber
+    execute if data storage auction: {EntryAvailable:true} run scoreboard players reset * Auction.EntryNumber
     execute if data storage auction: {EntryAvailable:true} run tag @a[tag=Auction.Entried] remove Auction.Entried
     
 #> プレイヤー通知

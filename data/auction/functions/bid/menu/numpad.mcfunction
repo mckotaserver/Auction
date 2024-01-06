@@ -14,8 +14,6 @@
     scoreboard players operation @s Auction.Temp *= #10 Constant
     scoreboard players operation @s Auction.Temp += #ClickedNumber Auction.Temp
 
-    tellraw @a {"score":{"name": "@s","objective": "Auction.Temp"}}
-
 #> エラー出力2
     # 入力上限 (もとに戻す)
     execute if score @s Auction.Temp > #BidMax Auction.Temp run tellraw @s [{"translate":"kota-server.auction.message.prefix"},{"translate":"kota-server.auction.message.error.bid_too_big"}]

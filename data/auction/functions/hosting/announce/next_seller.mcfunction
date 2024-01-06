@@ -1,11 +1,11 @@
 ## 次の出品者告知
 #> 出品者選出
     # 最大値はいくつ
-    scoreboard players set #NextSeller Auction.EntryNumber -1
-    scoreboard players operation #NextSeller Auction.EntryNumber > @a[tag=Auction.Entried] Auction.EntryNumber
+    scoreboard players set #NextSellerNumber Auction.Temp -1
+    scoreboard players operation #NextSellerNumber Auction.Temp > @a[tag=Auction.Entried] Auction.EntryNumber
 
     # 最大値に一致する人
-    execute as @a[tag=Auction.Entried] if score @s Auction.EntryNumber = #NextSeller Auction.EntryNumber run tag @s add Auction.Temp-NextSeller
+    execute as @a[tag=Auction.Entried] if score @s Auction.EntryNumber = #NextSellerNumber Auction.Temp run tag @s add Auction.Temp-NextSeller
 
     # 出品者タグ, スコアを削除
     tag @a[tag=Auction.Temp-NextSeller] remove Auction.Entried

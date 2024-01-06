@@ -1,5 +1,5 @@
 {
     "values": [
-        "auction:entry/toggle_availability"
+        "auction:bid/pre_start"
     ]
 }

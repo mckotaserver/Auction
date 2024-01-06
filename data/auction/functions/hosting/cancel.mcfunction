@@ -1,7 +1,7 @@
 ## オークションの途中キャンセル
 #> プレイヤー通知
     # tellraw
-    tellraw @a[tag=Auction.Participant] [{"text":"[","color": "white"},{"text":"Auction","color": "#8a2be2"},{"text":"] ","color": "white"},{"text":"オークションをキャンセルしました。","color": "red","bold": false}]
+    tellraw @a[tag=Auction.Participant] [{"translate":"kota-server.auction.message.prefix"},{"translate":"kota-server.auction.message.cancel_auction"}]
 
     # playsound
     execute as @a[tag=Auction.Participant] at @s run playsound block.note_block.pling master @s ~ ~ ~ 1 0.5

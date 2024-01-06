@@ -13,13 +13,8 @@
         execute if score @s Auction.Temp matches 0 run return -1
         
 #> 計算
-    # 現在入札額取得
-    scoreboard players operation @s Auction.Temp = @s Auction.Bid
-
     # 繰り上がり処理
     scoreboard players operation @s Auction.Temp *= #10000 Constant
-
-    tellraw @a {"score":{"name": "@s","objective": "Auction.Temp"}}
 
 #> エラー出力2
     # 入力上限 (もとに戻す)

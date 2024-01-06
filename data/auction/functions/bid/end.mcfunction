@@ -25,6 +25,9 @@
     scoreboard players set @a[tag=Auction.Participant] Auction.Temp -1
     scoreboard players set @a[tag=Auction.Participant] Auction.Bid 0
 
+    scoreboard players set #BidTop Auction.Bid 0
+    scoreboard players set #BidMin Auction.Bid 0
+
     # タグ除去
     tag @a[tag=Auction.Participant] remove Auction.Participant
     tag @a[tag=Auction.TopBidder] remove Auction.TopBidder

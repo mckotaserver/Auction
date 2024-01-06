@@ -12,11 +12,23 @@
     
     execute if entity @s[tag=Auction.TopBidder] run return -1
 
+    # 所持金より大きい
+    execute if score @s Auction.Temp > #PlayerMP Auction.Temp run tellraw @s [{"translate":"kota-server.auction.message.prefix"},{"translate":"kota-server.auction.message.error.bid_over_purse"}]
+    execute if score @s Auction.Temp > #PlayerMP Auction.Temp run playsound entity.experience_orb.pickup master @s ~ ~ ~ 1 0.5
+
+    execute if score @s Auction.Temp > #PlayerMP Auction.Temp run return -1
+
+    # 所持金より大きい
+    execute if score @s Auction.Temp matches 12000001.. run tellraw @s [{"translate":"kota-server.auction.message.prefix"},{"translate":"kota-server.auction.message.error.bid_over_limit"}]
+    execute if score @s Auction.Temp matches 12000001.. run playsound entity.experience_orb.pickup master @s ~ ~ ~ 1 0.5
+
+    execute if score @s Auction.Temp matches 12000001.. run return -1
+
     # 最低入札額より小さい
     execute store result score #BidMin Auction.Temp run data get storage auction: Bid.Top
     scoreboard players add #BidMin Auction.Temp 100
 
-    execute if score @s Auction.Temp < #BidMin Auction.Temp run tellraw @s [{"translate":"kota-server.auction.message.prefix"},{"translate":"kota-server.auction.message.error.bid_too_small"}]
+    execute if score @s Auction.Temp < #BidMin Auction.Temp run tellraw @s [{"translate":"kota-server.auction.message.prefix"},{"translate":"kota-server.auction.message.error.bid_under_limit"}]
     execute if score @s Auction.Temp < #BidMin Auction.Temp run playsound entity.experience_orb.pickup master @s ~ ~ ~ 1 0.5
 
     execute if score @s Auction.Temp < #BidMin Auction.Temp run return -1
@@ -29,6 +41,7 @@
     execute store result storage auction: Bid.Top int 1 run scoreboard players get @s Auction.Bid
 
     scoreboard players operation #BidTop Auction.Bid = @s Auction.Bid
+    
     scoreboard players operation #BidMin Auction.Bid = @s Auction.Bid
     scoreboard players add #BidMin Auction.Bid 100
     
